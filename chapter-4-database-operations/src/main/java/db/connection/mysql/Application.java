@@ -10,8 +10,10 @@ import db.connection.mysql.connection.dao.DepartmentDAO;
 import db.connection.mysql.connection.dao.EmployeeDAO;
 import db.connection.mysql.connection.dao.ManagerDAO;
 import db.connection.mysql.connection.dao.SalaryDAO;
+import db.connection.mysql.connection.model.Department;
 import db.connection.mysql.connection.model.Employee;
 import db.connection.mysql.connection.model.EmployeeProfile;
+import db.connection.mysql.connection.model.Manager;
 import db.connection.mysql.connection.service.DepartmentService;
 import db.connection.mysql.connection.service.EmployeeService;
 import db.connection.mysql.connection.service.ManagerService;
@@ -69,10 +71,10 @@ public class Application {
 					System.out.println();
 					break;
 				case 7:
-					// burada aktif yöneticileri listeleyen bir fonksiyon yazmalısınız.
+					aktifYoneticiListesi(managerService);
 					break;
 				case 8:
-					// burada tüm departmanları listeleyiniz.
+					departmanListele(departmentService);
 					break;
 				default:
 					break;
@@ -80,6 +82,25 @@ public class Application {
 			
 		}
 		
+	}
+	public static void aktifYoneticiListesi(ManagerService managerService) {
+		List<Manager> managers = managerService.aktifYoneticiListesi();
+		Iterator<Manager> iterator = managers.iterator();
+		
+		while(iterator.hasNext()) {
+			Manager manager = iterator.next();
+			System.out.println(manager);
+		}
+	}
+	
+	public static void departmanListele(DepartmentService departmentService) {
+		List<Department> departments = departmentService.kayıtBul();
+		Iterator<Department> iterator = departments.iterator();
+		
+		while(iterator.hasNext()) {
+			Department department = iterator.next();
+			System.out.println(department);
+		}
 	}
 	
 	private static void showMenu() {

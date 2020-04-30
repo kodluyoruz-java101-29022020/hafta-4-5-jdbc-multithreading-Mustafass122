@@ -19,16 +19,17 @@ public class DepartmentDAO {
 		
 		List<Department> departments = new ArrayList<Department>();
 		
-		// Tüm departman listesini çeken SQL komutunu aşağıdaki satıra yazınız.
-		ResultSet resultSet = DbSQLQuery.select("<Bu SQL sorgusunu oluştur>");
+		ResultSet resultSet = DbSQLQuery.select("select * from departmens");//Tüm departmanı getir
 		
 		try {
 			
-			// ResultSet içinde veritabanından gelen department kayıtları var.
-			// ResultSet üzerinde satır satır ilerleyerek bir Department listesi oluştur.
-			// List<Department> departments bu listeye elemanları ekleyeceksiniz.
-			
-			// Kodlar ... :)
+			if (resultSet == null) {
+                return departments;
+            }
+			while (resultSet.next()) {
+                Department mydepartment = new Department(resultSet.getString("dept_no"), resultSet.getString("dept_name"));
+                departments.add(mydepartment);
+            }
 			
 		}
 		catch (Exception e) {
